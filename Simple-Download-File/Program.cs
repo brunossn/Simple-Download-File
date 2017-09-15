@@ -22,7 +22,12 @@ namespace Simple_Download_File
 
                 try
                 {
+                    // Baixa com nome temporário
+                    var localTemporario = Path.GetTempPath() + "\\" + Path.GetTempFileName();
                     wc.DownloadFile(url, local);
+
+                    // Salva no destino
+                    File.Copy(localTemporario, local, true);
                 }
                 catch(Exception ex)
                 {
