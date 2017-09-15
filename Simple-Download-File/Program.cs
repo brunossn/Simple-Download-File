@@ -23,8 +23,8 @@ namespace Simple_Download_File
                 try
                 {
                     // Baixa com nome temporário
-                    var localTemporario = Path.GetTempPath() + "\\" + Path.GetTempFileName();
-                    wc.DownloadFile(url, local);
+                    var localTemporario = Path.GetTempFileName();
+                    wc.DownloadFile(url, localTemporario);
 
                     // Salva no destino
                     File.Copy(localTemporario, local, true);
@@ -58,7 +58,7 @@ namespace Simple_Download_File
             }
 
             // Caminho físico válido
-            var diretorio = Path.GetFullPath(args[1]);
+            var diretorio = Path.GetDirectoryName(args[1]);
             if (!Directory.Exists(diretorio))
             {
                 try
@@ -72,9 +72,9 @@ namespace Simple_Download_File
             }
 
             // URL válida
-            if(!(Uri.IsWellFormedUriString(args[1], UriKind.Absolute)))
+            if(!(Uri.IsWellFormedUriString(args[0], UriKind.Absolute)))
             {
-                Console.WriteLine("URL inválida no parâmetro 2.");
+                Console.WriteLine("URL inválida no parâmetro 1.");
                 return false;
             }
 
